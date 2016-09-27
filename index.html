@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>天气查询</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+  </head>
+  <body>
+    <p>请输入城市名:
+      <input type="text" id="city">
+      <a href="javascript:void(0)" onclick="doSearch()">查询</a>
+    </p>
+    <div class="weatherInfo">
+      <script type="text/html" id="table">
+        <table class="table">
+          <tr>
+            <th>日期</th>
+            <th>星期</th>
+            <th>风向</th>
+            <th>风力</th>
+            <th>最高温度</th>
+            <th>最低温度</th>
+            <th>天气状态</th>
+          </tr>
+          {{each list}}
+          <tr>
+            <td>{{$value.date}}</td>
+            <td>{{$value.week}}</td>
+            <td>{{$value.fengxiang}}</td>
+            <td>{{$value.fengli}}</td>
+            <td>{{$value.hightemp}}</td>
+            <td>{{$value.lowtemp}}</td>
+            <td>{{$value.type}}</td>
+          </tr>
+          {{/each}}
+        </table>
+      </script>
+    </div>
+    <script src="lib/jquery.min.js" charset="utf-8"></script>
+    <script src="lib/bootstrap.min.js" charset="utf-8"></script>
+    <script src="lib/template.js" charset="utf-8"></script>
+    <script src="js/index.js" charset="utf-8"></script>
+  </body>
+</html>
