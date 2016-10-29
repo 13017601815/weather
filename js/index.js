@@ -1,9 +1,10 @@
 var text = document.querySelector('#city');
+var content = document.querySelector('#listBody');
 text.onkeyup = function(e){
   if(e.keyCode == 13){
     getCityCode(text.value);
   }
-}
+};
 function doSearch(){
   getCityCode(text.value);
 }
@@ -20,13 +21,20 @@ function getCityCode(cityName){
     },
     dataType:'json',
     success:function(res){
-      console.log(res);
+      if(res.errNum == 0){
+        console.log(res);
       var cityCode = res.retData.cityCode;
-      var city = res.retData.city
+      var city = res.retData.city;
       getWeatherInfo(city,cityCode);
+    }else{
+       console.log(err);
+       content.innerHTML = res.resMsg;
+    }
+
     },
     error:function(err){
       console.log(err);
+      content.innerHTML = err;
     }
   });
 }
@@ -44,20 +52,25 @@ function getWeatherInfo(city,cityCode){
     },
     dataType:'json',
     success:function(res){
-      console.log(res);
-      if(res.retData)
-      var data = [];
+      // console.log(res);
+      if(res.errNum == 0){
+        var data = [];
       var forecast = res.retData['forecast'];
       var today = res.retData['today'];
       var history = res.retData['history'];
       data = history.concat(today,forecast); //concat链接数组
       console.dir(data);
+      content.innerHTML = template('table',{list:data});
 
-      document.querySelector('.weatherInfo').innerHTML = template('table',{list:data});
+    }else{
+      console.log(res);
+				content.innerHTML = res.retMsg;
+    }
 
     },
     error:function(err){
       console.log(err);
+      content.innerHTML = err;
     }
   })
 }

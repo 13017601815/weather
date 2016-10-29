@@ -6,14 +6,16 @@
     <link rel="stylesheet" href="lib/bootstrap.min.css">
   </head>
   <body>
-    <p>请输入城市名:
-      <input type="text" id="city">
-      <a href="javascript:void(0)" onclick="doSearch()">查询</a>
-    </p>
     <div class="weatherInfo">
-      <script type="text/html" id="table">
+      <div>
+        <p>请输入城市名:
+          <input type="text" id="city">
+          <a href="javascript:void(0)" onclick="doSearch()">查询</a>
+        </p>
+      </div>
         <table class="table">
-          <tr>
+          <thead>
+            <tr>
             <th>日期</th>
             <th>星期</th>
             <th>风向</th>
@@ -22,6 +24,13 @@
             <th>最低温度</th>
             <th>天气状态</th>
           </tr>
+          </thead>
+          <tbody id="listBody">
+
+          </tbody>
+        </table>
+      </div>
+      <script type="text/html" id="table">
           {{each list}}
           <tr>
             <td>{{$value.date}}</td>
@@ -33,9 +42,7 @@
             <td>{{$value.type}}</td>
           </tr>
           {{/each}}
-        </table>
       </script>
-    </div>
     <script src="lib/jquery.min.js" charset="utf-8"></script>
     <script src="lib/bootstrap.min.js" charset="utf-8"></script>
     <script src="lib/template.js" charset="utf-8"></script>
